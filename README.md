@@ -1,4 +1,6 @@
-# my-bun-fun
+# portfolio-ai
+
+My personal developer portfolio with an AI assistant
 
 To install dependencies:
 
