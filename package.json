@@ -6,6 +6,7 @@
     "dev": "bun run --watch src/index.tsx"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "latest",
     "bun-types": "latest",
     "typed-html": "^3.0.1"
   },
