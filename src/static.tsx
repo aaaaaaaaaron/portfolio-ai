@@ -2,7 +2,7 @@ import * as elements from "typed-html"
 
 export const Navigation = () => {
     return (
-        <div class="h-50 bg-white text-center text-4xl py-2 shadow-sm">
+        <div class="bg-white text-center text-3xl py-2 shadow-sm">
             <nav>
                 <a class="p-10 hover:bg-zinc-300 hover:text-zinc-700" href="#about">About</a>
                 <a class="p-10 hover:bg-zinc-300 hover:text-zinc-700" href="#expierence">Expierence</a>
@@ -64,7 +64,7 @@ export const Expierence = () => {
                 <img src="/public/fig8.png" alt="Aerial coverage algorithm" class="object-cover h-72 w-72 p-5 justify-right"></img>
                 <p class="px-5">
                     In the Summer of 2020 I researched Machine Learning and Reinforcement Learning techniques to determine efficient ways for unmanned aerial vehicles
-                    to cover spaces. The work was meant to help farmers, forest rangers and anyone who wanted to view spacial areas. We got to fly drones and it was super fun!
+                    to cover and photograph spaces. The work was meant to help farmers, forest rangers and anyone who wanted to view spacial areas. We got to fly drones and it was super fun!
                 </p>
             </div>
 
@@ -78,6 +78,23 @@ export const Music = () => {
             <h1 class="text-5xl text-center py-5">My Music</h1>
             <h1 class="text-1xl text-center py-5">Check out these songs I've made. I also play viola!</h1>
             <iframe class="px-96"style="display:block;" width="100%" height="450" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1698485913&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/aaron-gould-7" title="Aaron Gould" target="_blank" style="color: #cccccc; text-decoration: none;">Aaron Gould</a> · <a href="https://soundcloud.com/aaron-gould-7/sets/all-tracks" title="all tracks" target="_blank" style="color: #cccccc; text-decoration: none;">all tracks</a></div>
+        </div>
+    )
+}
+
+export const WebsiteInfo = () => {
+    return (
+        <div class="h-fit bg-zinc-200 shadow-sm grid place-items-center pt-3 pb-2" id="about">
+            <h1 class="text-2xl text-center">About this website</h1>
+            <div class="justify-center place-items-center text-center max-w-6xl">
+                <p class="px-5 text-sm">
+                    This website was made with Bun, Elysia and HTMX. The AI is OpenAI's ChatGPT 3.5-Turbo model. It uses cookies so I guess leave if thats a problem for you.
+                </p>
+                <p class="px-5 text-sm">
+                    Find the code on my
+                    <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="https://github.com/aaaaaaaaaron/portfolio-ai" target="_blank">GitHub</a>.
+                </p>
+            </div>
         </div>
     )
 }

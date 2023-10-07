@@ -2,7 +2,7 @@ import Elysia, { t } from "elysia";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
 import * as elements from "typed-html"
-import {Navigation, About, Expierence, Music} from "./static.tsx"
+import {Navigation, About, Expierence, Music, WebsiteInfo} from "./static.tsx"
 import OpenAI from "openai";
 import { prompt } from "./prompt.ts";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
@@ -19,12 +19,9 @@ const app = new Elysia()
     .get("/", ({ html, cookie: {cookie}}) => {
         cookie.httpOnly = true
         if (!cookie.value) {
-            console.log("set cookies")
             cookie.value = {
                 messages: [cannedMessage]
             }
-        } else {
-            console.log("cookies are set already")
         }
         return html(
             <BaseHtml>
@@ -34,6 +31,7 @@ const app = new Elysia()
                     <Expierence />
                     <AaronIntelligence messages={cookie.value.messages} />
                     <Music />
+                    <WebsiteInfo />
                 </div>
             </BaseHtml>
         )
@@ -66,24 +64,22 @@ const app = new Elysia()
 console.log(`Elysia is running on ${app.server?.hostname}:${app.server?.port} `)
 
 // for dev purposes
-function delay(ms: number) {
-    console.log("sleeping")
-    return new Promise( resolve => setTimeout(resolve, ms) );
-}
+// function delay(ms: number) {
+//     console.log("sleeping")
+//     return new Promise( resolve => setTimeout(resolve, ms) );
+// }
 
 const respond = async (messages: string[]) => {
-    const cannedResponses = ["Great point!", "Coolio!", "Facts"]
+    // const cannedResponses = ["Great point!", "Coolio!", "Facts"]
     // await delay(500)
     // return cannedResponses[Math.floor(Math.random() * cannedResponses.length)]
 
     const messagesFormatted = createMessageObject(messages)
-
     const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: messagesFormatted,
     });
     console.log(response)
-
     return response.choices[0].message.content
 }
 
@@ -126,13 +122,25 @@ const AaronIntelligence = ({messages}: {messages: string[]}) => {
     return (
         <div class="h-fit bg-zinc-200 shadow-sm grid place-items-center" id="chat">
             <h1 class="text-5xl text-center py-5">Talk to me!</h1>
-            <h1 class="text-2xl py-5">Talk to my AI* persona. Ask it facts about me or just have a conversation!</h1>
-            <p>*Aaron Intelligence</p>
+            <h1 class="text-2xl pb-4 pt-3">
+                Talk to my <button data-tooltip-target="tooltip-default">AI*</button> persona. Ask it facts about me or just have a conversation!
+            </h1>
+            <div id="tooltip-default" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                *Aaron Intelligence
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
 
             <Chatbox messages={messages} />
 
-            <p>Disclaimer! This AI may make up false statements about me.</p>
-            <p>It's statements and opinions may not be an actualy representation of mine.</p>
+            <p class="text-sm mt-2">Disclaimer! This AI may make up false statements about me.</p>
+            <p class="text-sm">It's statements and opinions may not be an actual representation of mine.</p>
+
+            <p class="my-5">
+                If you would like to talk to me for real, find my contact information on my 
+                <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="/public/resume.pdf" target="_blank">resume</a> 
+                or message me on 
+                <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="https://www.linkedin.com/in/aaron-gould-287036188/" target="_blank">LinkedIn</a>.
+            </p>
         </div>
     )
 }
