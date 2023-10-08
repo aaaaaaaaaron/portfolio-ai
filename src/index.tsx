@@ -69,17 +69,13 @@ function delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
 }
 
-const respond = async (messages: string[]) => {
+const respond2 = async (messages: string[]) => {
     const cannedResponses = ["Great point!", "Coolio!", "Facts"]
     await delay(500)
     return cannedResponses[Math.floor(Math.random() * cannedResponses.length)]
 }
 
-const respond2 = async (messages: string[]) => {
-    // const cannedResponses = ["Great point!", "Coolio!", "Facts"]
-    // await delay(500)
-    // return cannedResponses[Math.floor(Math.random() * cannedResponses.length)]
-
+const respond = async (messages: string[]) => {
     const messagesFormatted = createMessageObject(messages)
     const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
@@ -101,8 +97,8 @@ const createMessageObject = (messages: string[]) => {
 
 const Chatbox = ({messages}: {messages: string[]}) => {
     return (
-        <div class="h-fit bg-zinc-300 shadow-sm grid place-items-center rounded" id="chatbox">
-            <div class="bg-zinc-300 place-items-center max-w-4xl h-96 overflow-auto mx-2 rounded-t" id="chats">
+        <div class="h-fit bg-zinc-300 shadow-sm grid place-items-center rounded mx-2" id="chatbox">
+            <div class="bg-zinc-300 place-items-center max-w-4xl h-96 overflow-auto mx-2 rounded-t" id="chats" style="overflow-anchor: auto">
                 <button class="sticky top-[1vh] ml-2 bg-zinc-400 rounded font-semibold px-1" hx-put="/reset" hx-target="#chatbox" hx-swap="outerHTML" data-loading-disable>
                     Reset
                 </button>
