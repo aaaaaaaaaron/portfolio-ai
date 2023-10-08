@@ -64,12 +64,18 @@ const app = new Elysia()
 console.log(`Elysia is running on ${app.server?.hostname}:${app.server?.port} `)
 
 // for dev purposes
-// function delay(ms: number) {
-//     console.log("sleeping")
-//     return new Promise( resolve => setTimeout(resolve, ms) );
-// }
+function delay(ms: number) {
+    console.log("sleeping")
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
 const respond = async (messages: string[]) => {
+    const cannedResponses = ["Great point!", "Coolio!", "Facts"]
+    await delay(500)
+    return cannedResponses[Math.floor(Math.random() * cannedResponses.length)]
+}
+
+const respond2 = async (messages: string[]) => {
     // const cannedResponses = ["Great point!", "Coolio!", "Facts"]
     // await delay(500)
     // return cannedResponses[Math.floor(Math.random() * cannedResponses.length)]
@@ -95,23 +101,22 @@ const createMessageObject = (messages: string[]) => {
 
 const Chatbox = ({messages}: {messages: string[]}) => {
     return (
-        <div class="h-fit bg-zinc-200 shadow-sm grid place-items-center max-w-4xl w-8/12" id="chatbox">
-            <div class="grid grid-cols-2 bg-zinc-300 max-w-4xl h-fit w-8/12 overflow-auto mt-5 rounded-t" id="chatbox-header">
-                <button class="m-2 bg-zinc-400 rounded h-6 mr-48 font-semibold justify-right" hx-put="/reset" hx-target="#chatbox" hx-swap="outerHTML" data-loading-disable>
+        <div class="h-fit bg-zinc-300 shadow-sm grid place-items-center rounded" id="chatbox">
+            <div class="bg-zinc-300 place-items-center max-w-4xl h-96 overflow-auto mx-2 rounded-t" id="chats">
+                <button class="sticky top-[1vh] ml-2 bg-zinc-400 rounded font-semibold px-1" hx-put="/reset" hx-target="#chatbox" hx-swap="outerHTML" data-loading-disable>
                     Reset
                 </button>
-            </div>
-            <div class="bg-zinc-300 place-items-center max-w-4xl h-96 w-8/12 overflow-auto" id="chats">
                 <ul>
                     {messages.map(function(message, i){
                         return <Message message={message} index={i} />;
                     })}
                 </ul>
             </div>
-            <div class=" bg-zinc-300 max-w-4xl h-fit w-8/12 overflow-auto mb-5 rounded-b" id="chatbox-bottom">
-                <form class="grid grid-cols-2 bg-zinc-300  overflow-auto mb-5 rounded-b" hx-put="/message" hx-target="#chatbox" hx-swap="outerHTML">
-                    <input class="m-2 bg-zinc-4d00 rounded h-8 p-2" name="message" placeholder="Send a message" data-loading-disable></input>
-                    <button class="m-2 bg-zinc-400 rounded h-8 mr-48 font-semibold" data-loading-disable>send</button>
+
+            <div class="h-fit overflow-auto rounded-b mx-2" id="chatbox-bottom">
+                <form class="grid grid-cols-2 overflow-auto mt-2 mb-1 rounded-b" hx-put="/message" hx-target="#chatbox" hx-swap="outerHTML">
+                    <input class="mx-2 rounded h-8 p-2" name="message" placeholder="Send a message" data-loading-disable></input>
+                    <button class="mx-2 bg-zinc-400 rounded h-8 font-semibold" data-loading-disable>send</button>
                 </form>
             </div>
         </div>
@@ -122,20 +127,17 @@ const AaronIntelligence = ({messages}: {messages: string[]}) => {
     return (
         <div class="h-fit bg-zinc-200 shadow-sm grid place-items-center" id="chat">
             <h1 class="text-5xl text-center py-5">Talk to me!</h1>
-            <h1 class="text-2xl pb-4 pt-3">
-                Talk to my <button data-tooltip-target="tooltip-default">AI*</button> persona. Ask it facts about me or just have a conversation!
+            <h1 class="text-2xl pt-3 text-center">
+                Talk to my AI* persona. Ask it facts about me or just have a conversation!
             </h1>
-            <div id="tooltip-default" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                *Aaron Intelligence
-                <div class="tooltip-arrow" data-popper-arrow></div>
-            </div>
+            <p class="pb-4 text-xs">*Aaron Intelligence</p>
 
             <Chatbox messages={messages} />
 
-            <p class="text-sm mt-2">Disclaimer! This AI may make up false statements about me.</p>
-            <p class="text-sm">It's statements and opinions may not be an actual representation of mine.</p>
+            <p class="text-sm mt-2 text-center">Disclaimer! This AI may make up false statements about me.</p>
+            <p class="text-sm text-center">It's statements and opinions may not be an actual representation of mine.</p>
 
-            <p class="my-5">
+            <p class="my-5 mx-2 text-center">
                 If you would like to talk to me for real, find my contact information on my 
                 <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="/public/resume.pdf" target="_blank">resume</a> 
                 or message me on 
@@ -148,13 +150,13 @@ const AaronIntelligence = ({messages}: {messages: string[]}) => {
 const Message = ({message, index}: {message: string; index: number}) => {
     if (index % 2) {
         return (
-            <div class="m-2 bg-slate-200 rounded mr-48">
+            <div class="m-2 bg-slate-200 max-w-sm rounded md:mr-48 mr-10">
                 <p class="mx-2">{message}</p>
             </div>
         )
     } else {
         return (
-            <div class="m-2 bg-gray-200 rounded ml-48">
+            <div class="m-2 bg-gray-200 max-w-sm rounded md:ml-48 ml-10">
                 <p class="mx-2">{message}</p>
             </div>
         )
