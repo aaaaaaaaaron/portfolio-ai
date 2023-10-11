@@ -52,6 +52,7 @@ const app = new Elysia()
         cookie.value.messages.push(body.message)
         const response = await respond(cookie.value.messages)
         cookie.value.messages.push(response)
+        console.log(cookie.value.messages)
         cookie.set({})
         return <Messages messages={[body.message, response]}/>
     }, 
@@ -81,7 +82,7 @@ const respond = async (messages: string[]) => {
         model: "gpt-3.5-turbo",
         messages: messagesFormatted,
     });
-    console.log(response)
+    console.log(response.usage)
     if (response.choices[0].message.content == null) {return "null"} else {return response.choices[0].message.content}
 }
 
@@ -91,7 +92,6 @@ const createMessageObject = (messages: string[]) => {
         let role: 'system' | 'user' | 'assistant' | 'function' = i % 2 ? "user": "assistant"
         messagesFormatted.push({"role": role, "content": message})
     })
-    console.log(messagesFormatted)
     return messagesFormatted
 }
 
