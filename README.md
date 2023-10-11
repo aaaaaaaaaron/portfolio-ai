@@ -2,6 +2,9 @@
 
 My personal developer portfolio with an AI assistant
 
+The website is live at:
+https://aaron-gould.fly.dev/
+
 To install dependencies:
 
 ```bash
