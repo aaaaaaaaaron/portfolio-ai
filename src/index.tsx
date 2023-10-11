@@ -53,10 +53,10 @@ const app = new Elysia()
         const response = await respond(cookie.value.messages)
         cookie.value.messages.push(response)
         cookie.set({})
-        return <Chatbox messages={cookie.value.messages}/>
+        return <Messages messages={[body.message, response]}/>
     }, 
     {
-        body: t.Object({message: t.String()}), // define html body response type
+        body: t.Object({message: t.String()}) // define html body response type
     }
     )
     .listen(3000);
@@ -82,7 +82,7 @@ const respond = async (messages: string[]) => {
         messages: messagesFormatted,
     });
     console.log(response)
-    return response.choices[0].message.content
+    if (response.choices[0].message.content == null) {return "null"} else {return response.choices[0].message.content}
 }
 
 const createMessageObject = (messages: string[]) => {
@@ -95,6 +95,15 @@ const createMessageObject = (messages: string[]) => {
     return messagesFormatted
 }
 
+const Messages = ({messages}: {messages: string[]}) => {
+    return (
+        <div>
+            {messages.map(function(message, i){
+                return <Message message={message} index={i+1} />;
+            })}
+        </div>
+    )
+}
 const Chatbox = ({messages}: {messages: string[]}) => {
     return (
         <div class="h-fit bg-zinc-300 shadow-sm grid place-items-center rounded mx-2" id="chatbox">
@@ -102,7 +111,7 @@ const Chatbox = ({messages}: {messages: string[]}) => {
                 <button class="sticky top-[1vh] ml-2 bg-zinc-400 rounded font-semibold px-1" hx-put="/reset" hx-target="#chatbox" hx-swap="outerHTML" data-loading-disable>
                     Reset
                 </button>
-                <ul>
+                <ul id="messagesList">
                     {messages.map(function(message, i){
                         return <Message message={message} index={i} />;
                     })}
@@ -110,9 +119,9 @@ const Chatbox = ({messages}: {messages: string[]}) => {
             </div>
 
             <div class="h-fit overflow-auto rounded-b mx-2" id="chatbox-bottom">
-                <form class="grid grid-cols-2 overflow-auto mt-2 mb-1 rounded-b" hx-put="/message" hx-target="#chatbox" hx-swap="outerHTML">
-                    <input class="mx-2 rounded h-8 p-2" name="message" placeholder="Send a message" data-loading-disable></input>
-                    <button class="mx-2 bg-zinc-400 rounded h-8 font-semibold" data-loading-disable>send</button>
+                <form class="grid grid-cols-2 overflow-auto mt-2 mb-1 rounded-b" hx-put="/message" hx-target="#messagesList" hx-swap="beforeend" hx-reset-on-success>
+                    <input class="mx-2 rounded h-8 p-2" name="message" placeholder="Send a message" id="messagebox" data-loading-disable></input>
+                    <button class="mx-2 bg-zinc-400 rounded h-8 font-semibold" type="submit" data-loading-disable>send</button>
                 </form>
             </div>
         </div>
@@ -171,9 +180,34 @@ const BaseHtml = ({children}: elements.Children) => `
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/loading-states.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        htmx.defineExtension('reset-on-success', {
+            onEvent: function(name, event) {
+                if (name !== 'htmx:beforeSwap') return;
+                if (event.detail.isError) return;
+        
+                const triggeringElt = event.detail.requestConfig.elt;
+                if (!triggeringElt.closest('[hx-reset-on-success]') && !triggeringElt.closest('[data-hx-reset-on-success]'))
+                    return;
+        
+                switch (triggeringElt.tagName) {
+                    case 'INPUT':
+                    case 'TEXTAREA':
+                        triggeringElt.value = triggeringElt.defaultValue;
+                        break;
+                    case 'SELECT':
+                        //too much work
+                        break;
+                    case 'FORM':
+                        triggeringElt.reset();
+                        break;
+                }
+            }
+        });
+    </script>
 </head>
 
-<body hx-ext="loading-states">
+<body hx-ext="loading-states, reset-on-success">
     ${children}
 </body>
 
