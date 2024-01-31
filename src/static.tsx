@@ -40,9 +40,9 @@ export const Expierence = () => {
             <div class="grid md:grid-cols-2 justify-center place-items-center max-w-6xl">
                 <img src="/public/logisolve_logo.jpg" alt="Logisolve logo" class="object-cover h-72 w-72 p-5 justify-right"></img>
                 <p class="px-5">
-                    I am currently working as a Software Engineer at Logisolve, a consulting company. I have had a lot of agency writing my own code.
-                    I have implemented front and backends of projects with a fast turnaround to meet deadlines. 
-                    I have learned a lot about fullstack development, especially regarding authorization and authentication of sensitive information.
+                    I am currently working as a Software Engineer at Logisolve implementing front and backends of projects for clients with fast turnarounds to meet deadlines.
+                    It has been rewarding building these projects from the ground up, mostly by myself.
+                    I have learned a lot about fullstack development, especially the authorization and authentication process for access to sensitive health information.
                 </p>
             </div>
 
@@ -50,7 +50,7 @@ export const Expierence = () => {
             <div class="grid md:grid-cols-2 justify-center place-items-center max-w-6xl">
                 <img src="/public/nps.jpg" alt="Aaron and Talon at the Toklat" class="object-cover h-72 w-72 p-5 justify-right"></img>
                 <p class="px-5">
-                    Summer of 2023 I worked at Denali National Park for the National Park Service as a Software Engineer, Data Manager and Acoustic Technician.
+                    In the Summer of 2023 I worked at Denali National Park for the National Park Service as a Software Engineer, Data Manager and Acoustic Technician.
                     My main project was creating a mobile app for Park Rangers to upload bear interactions into a database.
                     I also maintained multiple databases including the flight tracking database.
                     I installed acoustic monitoring stations around the park and used Machine Learning and Signal Processing techniques to analyze the data.
