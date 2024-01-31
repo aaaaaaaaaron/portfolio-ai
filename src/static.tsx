@@ -18,13 +18,13 @@ export const About = () => {
         <div class="h-fit bg-zinc-200 shadow-sm grid place-items-center" id="about">
             <h1 class="text-5xl text-center py-5">Hi, I'm Aaron</h1>
             <div class="grid md:grid-cols-2 justify-center place-items-center max-w-6xl">
-                <img src="/public/donkey.jpg" alt="Aaron and a donkey" class="object-cover h-72 w-72 p-5"></img>
+                <img src="/public/aaronwave.jpg" alt="Aaron saying hi" class="object-cover h-72 w-72 p-5"></img>
                 <p class="px-5">
                     Hey! Welcome to my website! My name is Aaron Gould and I am a developer from Minneapolis, MN. 
                     I have been working as a Software Engineer for the last two years since graduating college with a degree in Computer Science and Applied Mathematics. 
                     I have professional experience writing back end code creating APIs and interacting with large scale data. 
                     I also have experience creating and deploying websites and mobile applications.
-                    Currently unemployed, I am looking for work as a Software Engineer or Scientist. Please hire me!
+                    I am currently employed as a Software Engineer at Logisolve in Minnesota continuing work on Medical software.
                 </p>
             </div>
         </div>
@@ -35,6 +35,16 @@ export const Expierence = () => {
     return (
         <div class="h-auto bg-zinc-400 shadow-sm grid place-items-center" id="expierence">
             <h1 class="text-5xl text-center py-5">My Experience</h1>
+
+            <div class="grid grid-cols-1 max-w-6xl"><h1 class="text-4xl text-center drop-shadow-xl font-light">Logisolve</h1></div>
+            <div class="grid md:grid-cols-2 justify-center place-items-center max-w-6xl">
+                <img src="/public/logisolve_logo.jpg" alt="Logisolve logo" class="object-cover h-72 w-72 p-5 justify-right"></img>
+                <p class="px-5">
+                    I am currently working as a Software Engineer at Logisolve, a consulting company. I have had a lot of agency writing my own code.
+                    I have implemented front and backends of projects with a fast turnaround to meet deadlines. 
+                    I have learned a lot about fullstack development, especially regarding authorization and authentication of sensitive information.
+                </p>
+            </div>
 
             <div class="grid grid-cols-1 max-w-6xl"><h1 class="text-4xl text-center drop-shadow-xl font-light">National Park Service</h1></div>
             <div class="grid md:grid-cols-2 justify-center place-items-center max-w-6xl">
@@ -50,7 +60,7 @@ export const Expierence = () => {
 
             <div class="grid grid-cols-1 max-w-6xl"><h1 class="text-4xl text-center drop-shadow-xl font-light">Surescripts</h1></div>
             <div class="grid md:grid-cols-2 justify-center place-items-center max-w-6xl">
-                <img src="https://surescripts.com/themes/surescripts/templates/assets/images/surescripts-logo-opengraph.jpg" alt="Surescripts logo" class="object-cover h-72 w-72 p-5 justify-right"></img>
+                <img src="https://uploads-ssl.webflow.com/6005e66434bce7d171e69a38/606b641b23bfaa3899806dcc_SureScripts.png" alt="Surescripts logo" class="object-cover h-72 w-72 p-5 justify-right"></img>
                 <p class="px-5">
                     I interned at Surescripts as a Software Engineer in the Summer of 2021 and returned full time from Feburary 2022 till April 2023.
                     It was my first professional expierence developing software and I learned a lot about writing APIs, internal dashboards and working with large scale data.
