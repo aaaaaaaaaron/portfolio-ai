@@ -181,6 +181,13 @@ const BaseHtml = ({children}: elements.Children) => `
     <script src="https://unpkg.com/htmx.org/dist/ext/loading-states.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        document.addEventListener('htmx:afterSwap', function(event) {
+            if (event.detail.target.id === 'messagesList') {
+                const chats = document.getElementById('chats');
+                if (chats) chats.scrollTop = chats.scrollHeight;
+            }
+        });
+
         htmx.defineExtension('reset-on-success', {
             onEvent: function(name, event) {
                 if (name !== 'htmx:beforeSwap') return;
