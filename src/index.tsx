@@ -3,6 +3,7 @@ import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
 import Html from "@kitajs/html"
 import {Navigation, About, Expierence, Music, WebsiteInfo} from "./static.tsx"
+import {BaseHtml} from "./base.tsx"
 import OpenAI from "openai";
 import { prompt } from "./prompt.ts";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
@@ -156,9 +157,9 @@ const AaronIntelligence = ({messages}: {messages: string[]}) => {
             <p class="text-sm text-center">It's statements and opinions may not be an actual representation of mine.</p>
 
             <p class="my-5 mx-2 text-center">
-                If you would like to talk to me for real, find my contact information on my 
-                <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="/public/resume.pdf" target="_blank">resume</a> 
-                or message me on 
+                If you would like to talk to me for real, find my contact information on my{" "}
+                <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="/public/resume.pdf" target="_blank">resume</a>
+                {" "}or message me on{" "}
                 <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="https://www.linkedin.com/in/aaron-gould-287036188/" target="_blank">LinkedIn</a>.
             </p>
         </div>
@@ -181,54 +182,3 @@ const Message = ({message, index}: {message: string; index: number}) => {
     }
 }
 
-const BaseHtml = ({children}: Html.PropsWithChildren) => `
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aaron Gould</title>
-    <link rel="icon" type="image/x-icon" href="/public/devfavicon.png">
-    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
-    <script src="https://unpkg.com/htmx.org/dist/ext/loading-states.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        document.addEventListener('htmx:afterSwap', function(event) {
-            if (event.detail.target.id === 'messagesList') {
-                const chats = document.getElementById('chats');
-                if (chats) chats.scrollTop = chats.scrollHeight;
-            }
-        });
-
-        htmx.defineExtension('reset-on-success', {
-            onEvent: function(name, event) {
-                if (name !== 'htmx:beforeSwap') return;
-                if (event.detail.isError) return;
-        
-                const triggeringElt = event.detail.requestConfig.elt;
-                if (!triggeringElt.closest('[hx-reset-on-success]') && !triggeringElt.closest('[data-hx-reset-on-success]'))
-                    return;
-        
-                switch (triggeringElt.tagName) {
-                    case 'INPUT':
-                    case 'TEXTAREA':
-                        triggeringElt.value = triggeringElt.defaultValue;
-                        break;
-                    case 'SELECT':
-                        //too much work
-                        break;
-                    case 'FORM':
-                        triggeringElt.reset();
-                        break;
-                }
-            }
-        });
-    </script>
-</head>
-
-<body hx-ext="loading-states, reset-on-success">
-    ${children}
-</body>
-
-`;

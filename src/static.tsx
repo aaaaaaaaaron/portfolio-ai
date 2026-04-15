@@ -117,7 +117,7 @@ export const WebsiteInfo = () => {
                     This website was made with Bun, Elysia and HTMX. The AI is OpenAI's ChatGPT 3.5-Turbo model. It uses cookies to store chat data.
                 </p>
                 <p class="px-5 text-sm">
-                    Find the code on my
+                    Find the code on my{" "}
                     <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="https://github.com/aaaaaaaaaron/portfolio-ai" target="_blank">GitHub</a>.
                 </p>
             </div>
