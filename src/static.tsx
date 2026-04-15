@@ -24,7 +24,7 @@ export const About = () => {
                     I have been working as a Software Engineer for the last two years since graduating college with a degree in Computer Science and Applied Mathematics. 
                     I have professional experience writing back end code creating APIs and interacting with large scale data. 
                     I also have experience creating and deploying websites and mobile applications.
-                    I am currently employed as a Software Engineer at Logisolve in Minnesota continuing work on Medical software.
+                    I am currently contracted through Logisolve to AbeTech, where I develop machine vision systems for industrial automation and inspection.
                 </p>
             </div>
         </div>
@@ -36,13 +36,25 @@ export const Expierence = () => {
         <div class="h-auto bg-zinc-400 shadow-sm grid place-items-center" id="expierence">
             <h1 class="text-5xl text-center py-5">My Experience</h1>
 
-            <div class="grid grid-cols-1 max-w-6xl"><h1 class="text-4xl text-center drop-shadow-xl font-light">Logisolve</h1></div>
+            <div class="grid grid-cols-1 max-w-6xl"><h1 class="text-4xl text-center drop-shadow-xl font-light">AbeTech <span class="text-2xl font-normal text-zinc-600">via Logisolve</span></h1></div>
+            <div class="grid md:grid-cols-2 justify-center place-items-center max-w-6xl">
+                <img src="/public/abetechlogo.png" alt="AbeTech machine vision inspection line" class="object-cover h-72 w-72 p-5 justify-right"></img>
+                <p class="px-5">
+                    Since early 2024 I have been contracted through Logisolve to AbeTech, where I am the primary developer on multiple machine vision projects.
+                    Using Cognex imaging tools, I build automated inspection systems for manufacturing lines across a range of industries, including food production, bottling, and academic research.
+                    These systems handle defect detection, dimensional measurement, OCR, barcode reading, and reporting.
+                    I also integrate with factory equipment including PLCs and Arduinos.
+                    I have been heavily involved in all stages of these projects including development, maintenance, client support, and feature work.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 max-w-6xl"><h1 class="text-4xl text-center drop-shadow-xl font-light">Logisolve <span class="text-2xl font-normal text-zinc-600">Health</span></h1></div>
             <div class="grid md:grid-cols-2 justify-center place-items-center max-w-6xl">
                 <img src="/public/logisolve_logo.jpg" alt="Logisolve logo" class="object-cover h-72 w-72 p-5 justify-right"></img>
                 <p class="px-5">
-                    I am currently working as a Software Engineer at Logisolve implementing front and backends of projects for clients with fast turnarounds to meet deadlines.
-                    It has been rewarding building these projects from the ground up, mostly by myself.
-                    I have learned a lot about fullstack development, especially the authorization and authentication process for access to sensitive health information.
+                    Early in my time at Logisolve I built a HIPAA-compliant administrator portal for healthcare clients, creating, updating, and linking users to an existing legacy database.
+                    I implemented the full front and backend with a fast turnaround to meet deadlines.
+                    I worked extensively with Auth0 and Windows Authentication to protect sensitive health information.
                 </p>
             </div>
 
