@@ -1,4 +1,4 @@
-import * as elements from "typed-html"
+import Html from "@kitajs/html"
 
 export const Navigation = () => {
     return (

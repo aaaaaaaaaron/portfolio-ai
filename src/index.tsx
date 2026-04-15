@@ -1,13 +1,21 @@
 import Elysia, { t } from "elysia";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from '@elysiajs/static'
-import * as elements from "typed-html"
+import Html from "@kitajs/html"
 import {Navigation, About, Expierence, Music, WebsiteInfo} from "./static.tsx"
 import OpenAI from "openai";
 import { prompt } from "./prompt.ts";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
 
 const cannedMessage = 'Hey, welcome to my Website! Do you have any questions for me?'
+
+const cookieSchema = {
+    cookie: t.Cookie({
+        cookie: t.Optional(t.Object({
+            messages: t.Array(t.String())
+        }))
+    })
+}
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
@@ -35,13 +43,17 @@ const app = new Elysia()
                 </div>
             </BaseHtml>
         )
-    })
+    }, cookieSchema)
     .put('/reset', ({cookie: {cookie}}) => {
         cookie.httpOnly = true
-        cookie.value.messages = [cannedMessage]
+        if (!cookie.value) {
+            cookie.value = { messages: [cannedMessage] }
+        } else {
+            cookie.value.messages = [cannedMessage]
+        }
         cookie.set({})
         return <Chatbox messages={cookie.value.messages}/>
-    })
+    }, cookieSchema)
     .put('/message', async ({ body, cookie: {cookie} }) =>  {
         cookie.httpOnly = true
         if (!cookie.value) {
@@ -57,7 +69,8 @@ const app = new Elysia()
         return <Messages messages={[body.message, response]}/>
     }, 
     {
-        body: t.Object({message: t.String()}) // define html body response type
+        body: t.Object({message: t.String()}), // define html body response type
+        ...cookieSchema
     }
     )
     .listen(3000);
@@ -168,7 +181,7 @@ const Message = ({message, index}: {message: string; index: number}) => {
     }
 }
 
-const BaseHtml = ({children}: elements.Children) => `
+const BaseHtml = ({children}: Html.PropsWithChildren) => `
 <!DOCTYPE html>
 <html lang="en">
 
