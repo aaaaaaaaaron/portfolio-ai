@@ -93,7 +93,7 @@ const respond2 = async (messages: string[]) => {
 const respond = async (messages: string[]) => {
     const messagesFormatted = createMessageObject(messages)
     const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o-mini",
         messages: messagesFormatted,
     });
     console.log(response.usage)
@@ -158,7 +158,7 @@ const AaronIntelligence = ({messages}: {messages: string[]}) => {
 
             <p class="my-5 mx-2 text-center">
                 If you would like to talk to me for real, find my contact information on my{" "}
-                <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="/public/resume.pdf" target="_blank">resume</a>
+                <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="/public/aaron_gould_resume_062026.pdf" target="_blank">resume</a>
                 {" "}or message me on{" "}
                 <a class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" href="https://www.linkedin.com/in/aaron-gould-287036188/" target="_blank">LinkedIn</a>.
             </p>

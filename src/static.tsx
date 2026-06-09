@@ -21,7 +21,7 @@ export const About = () => {
                 <img src="/public/aaronwave.jpg" alt="Aaron saying hi" class="object-cover h-72 w-72 p-5"></img>
                 <p class="px-5">
                     Hey! Welcome to my website! My name is Aaron Gould and I am a developer from Minneapolis, MN. 
-                    I have been working as a Software Engineer for the last two years since graduating college with a degree in Computer Science and Applied Mathematics. 
+                    I have been working as a Software Engineer since graduating college with a degree in Computer Science and Applied Mathematics in 2021. 
                     I have professional experience writing back end code creating APIs and interacting with large scale data. 
                     I also have experience creating and deploying websites and mobile applications.
                     I am currently contracted through Logisolve to AbeTech, where I develop machine vision systems for industrial automation and inspection.
@@ -43,7 +43,7 @@ export const Expierence = () => {
                     Since early 2024 I have been contracted through Logisolve to AbeTech, where I am the primary developer on multiple machine vision projects.
                     Using Cognex imaging tools, I build automated inspection systems for manufacturing lines across a range of industries, including food production, bottling, and academic research.
                     These systems handle defect detection, dimensional measurement, OCR, barcode reading, and reporting.
-                    I also integrate with factory equipment including PLCs and Arduinos.
+                    I also integrate the software with factory equipment including PLCs and Arduinos.
                     I have been heavily involved in all stages of these projects including development, maintenance, client support, and feature work.
                 </p>
             </div>
@@ -114,7 +114,7 @@ export const WebsiteInfo = () => {
             <h1 class="text-2xl text-center">About this website</h1>
             <div class="justify-center place-items-center text-center max-w-6xl">
                 <p class="px-5 text-sm">
-                    This website was made with Bun, Elysia and HTMX. The AI is OpenAI's ChatGPT 3.5-Turbo model. It uses cookies to store chat data.
+                    This website was made in 2023 with Bun, Elysia and HTMX. The AI is OpenAI's ChatGPT 3.5-Turbo model. It uses cookies to store chat data.
                 </p>
                 <p class="px-5 text-sm">
                     Find the code on my{" "}
