@@ -114,7 +114,7 @@ export const WebsiteInfo = () => {
             <h1 class="text-2xl text-center">About this website</h1>
             <div class="justify-center place-items-center text-center max-w-6xl">
                 <p class="px-5 text-sm">
-                    This website was made in 2023 with Bun, Elysia and HTMX. The AI is OpenAI's ChatGPT 3.5-Turbo model. It uses cookies to store chat data.
+                    This website was made in 2023 with Bun, Elysia and HTMX. The AI is OpenAI's gpt-4o-mini model. It uses cookies to store chat data.
                 </p>
                 <p class="px-5 text-sm">
                     Find the code on my{" "}
