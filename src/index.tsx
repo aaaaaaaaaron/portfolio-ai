@@ -67,7 +67,7 @@ const app = new Elysia()
         cookie.value.messages.push(response)
         console.log(cookie.value.messages)
         cookie.set({})
-        return <Messages messages={[body.message, response]}/>
+        return <Message message={response} index={0} />
     }, 
     {
         body: t.Object({message: t.String()}), // define html body response type
@@ -122,7 +122,7 @@ const Chatbox = ({messages}: {messages: string[]}) => {
     return (
         <div class="h-fit bg-zinc-300 shadow-sm grid place-items-center rounded mx-2" id="chatbox">
             <div class="bg-zinc-300 place-items-center max-w-4xl h-96 overflow-auto mx-2 rounded-t" id="chats" style="overflow-anchor: auto">
-                <button class="sticky top-[1vh] ml-2 bg-zinc-400 rounded font-semibold px-1" hx-put="/reset" hx-target="#chatbox" hx-swap="outerHTML" data-loading-disable>
+                <button class="sticky top-[1vh] ml-2 bg-zinc-400 hover:bg-zinc-500 transition-colors rounded font-semibold px-1" hx-put="/reset" hx-target="#chatbox" hx-swap="outerHTML" data-loading-disable>
                     Reset
                 </button>
                 <ul id="messagesList">
@@ -133,9 +133,9 @@ const Chatbox = ({messages}: {messages: string[]}) => {
             </div>
 
             <div class="h-fit overflow-auto rounded-b mx-2" id="chatbox-bottom">
-                <form class="grid grid-cols-2 overflow-auto mt-2 mb-1 rounded-b" hx-put="/message" hx-target="#messagesList" hx-swap="beforeend" hx-reset-on-success>
-                    <input class="mx-2 rounded h-8 p-2" name="message" placeholder="Send a message" id="messagebox" data-loading-disable></input>
-                    <button class="mx-2 bg-zinc-400 rounded h-8 font-semibold" type="submit" data-loading-disable>send</button>
+                <form class="grid grid-cols-2 overflow-auto mt-2 mb-1 rounded-b" hx-put="/message" hx-target="#messagesList" hx-swap="beforeend">
+                    <input class="mx-2 rounded h-8 p-2" name="message" placeholder="Send a message" id="messagebox" autocomplete="off" data-loading-disable></input>
+                    <button class="mx-2 bg-zinc-400 hover:bg-zinc-500 active:bg-zinc-600 transition-colors rounded h-8 font-semibold" type="submit" data-loading-disable>send</button>
                 </form>
             </div>
         </div>
@@ -169,13 +169,13 @@ const AaronIntelligence = ({messages}: {messages: string[]}) => {
 const Message = ({message, index}: {message: string; index: number}) => {
     if (index % 2) {
         return (
-            <div class="m-2 bg-slate-200 max-w-sm rounded md:mr-48 mr-10">
+            <div class="message-animate m-2 bg-slate-200 max-w-sm rounded md:mr-48 mr-10">
                 <p class="mx-2">{message}</p>
             </div>
         )
     } else {
         return (
-            <div class="m-2 bg-gray-200 max-w-sm rounded md:ml-48 ml-10">
+            <div class="message-animate m-2 bg-gray-200 max-w-sm rounded md:ml-48 ml-10">
                 <p class="mx-2">{message}</p>
             </div>
         )
