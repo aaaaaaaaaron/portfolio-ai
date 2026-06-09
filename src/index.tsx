@@ -24,7 +24,7 @@ const openai = new OpenAI({
 
 const app = new Elysia()
     .use(html())
-    .use(staticPlugin())
+    .use(staticPlugin({ assets: `${import.meta.dir}/../public` }))
     .get("/", ({ html, cookie: {cookie}}) => {
         cookie.httpOnly = true
         if (!cookie.value) {
