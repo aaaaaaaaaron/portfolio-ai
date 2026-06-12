@@ -5,6 +5,7 @@ import Html from "@kitajs/html"
 import {Navigation, About, Expierence, Music, WebsiteInfo} from "./static.tsx"
 import {BaseHtml} from "./base.tsx"
 import OpenAI from "openai";
+import { createClient } from "@supabase/supabase-js";
 import { prompt } from "./prompt.ts";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
 
@@ -21,6 +22,11 @@ const cookieSchema = {
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
+
+const supabase = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!
+);
 
 const app = new Elysia()
     .use(html())
@@ -65,8 +71,11 @@ const app = new Elysia()
         cookie.value.messages.push(body.message)
         const response = await respond(cookie.value.messages)
         cookie.value.messages.push(response)
-        console.log(cookie.value.messages)
         cookie.set({})
+        supabase.from("conversations").insert({
+            messages: cookie.value.messages,
+            message_count: cookie.value.messages.length,
+        }).then(({ error }) => { if (error) console.error("Supabase insert error:", error) })
         return <Message message={response} index={0} />
     }, 
     {

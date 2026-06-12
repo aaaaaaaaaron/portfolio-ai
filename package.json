@@ -17,6 +17,7 @@
     "@elysiajs/html": "^1.4.0",
     "@elysiajs/static": "^1.4.9",
     "@sinclair/typebox": "^0.34.49",
+    "@supabase/supabase-js": "^2.108.1",
     "elysia": "^1.4.28",
     "openai": "^4.11.1"
   }
